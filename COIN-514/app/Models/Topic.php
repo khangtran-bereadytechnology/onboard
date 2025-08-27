@@ -9,6 +9,10 @@ class Topic extends Model
 {
     use HasFactory;
 
-    protected $fillable=['name','description'];
+    protected $fillable = ['name', 'description'];
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
