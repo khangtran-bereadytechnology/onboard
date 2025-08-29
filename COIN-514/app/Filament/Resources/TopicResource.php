@@ -44,6 +44,7 @@ class TopicResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -65,6 +66,7 @@ class TopicResource extends Resource
         return [
             'index' => Pages\ListTopics::route('/'),
             'create' => Pages\CreateTopic::route('/create'),
+            'view' => Pages\ViewTopic::route('/{record}'),
             'edit' => Pages\EditTopic::route('/{record}/edit'),
         ];
     }
