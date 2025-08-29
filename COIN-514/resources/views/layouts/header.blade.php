@@ -2,6 +2,7 @@
     <div class="flex flex-row w-full max-w-[900px] justify-between mx-auto px-3">
         <div class="flex flex-row gap-3">
             <a href="/">Home</a>
+            <a href="/admin">Admin</a>
         </div>
         <div>
             @auth

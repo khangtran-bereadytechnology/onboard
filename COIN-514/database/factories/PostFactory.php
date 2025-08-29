@@ -22,8 +22,7 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence(),
             'content' => $this->faker->paragraph(3, true),
             'topic_id' => Topic::factory(),
-            'user_id' => User::factory(),
-
+            'user_id' => 1,
         ];
     }
 }
