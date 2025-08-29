@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -31,7 +32,9 @@ class PostResource extends Resource
                 TextInput::make('title')->required()->minLength(2)
                     ->maxLength(255),
                 Select::make('topic_id')->label('Topic')->relationship('topic', 'name')->required(),
-                RichEditor::make('content')->required(),
+                TiptapEditor::make('content')
+                    ->profile('simple')
+                    ->required(),
                 Hidden::make('user_id')->default(fn() => auth()->id()),
             ])->columns(1);
     }
