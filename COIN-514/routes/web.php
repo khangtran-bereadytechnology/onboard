@@ -19,10 +19,6 @@ Route::get('/', function () {
 });
 
 Route::prefix('auth')->group(function () {
-    //route hiện view đăng ký
-    Route::get('/signup', [AuthController::class, 'showSignupForm'])->name('auth.showSignup');
-    //route xử lý đăng ký
-    Route::post('/signup', [AuthController::class, 'signUp'])->name('auth.signup');
     //route hiện view đăng nhập
     Route::get('/signin', [AuthController::class, 'showSigninForm'])->name('auth.showSignin');
     //route xử lý đăng nhập
