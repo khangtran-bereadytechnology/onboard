@@ -18,11 +18,9 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::prefix('auth')->group(function () {
-    //route hiện view đăng nhập
-    Route::get('/signin', [AuthController::class, 'showSigninForm'])->name('auth.showSignin');
-    //route xử lý đăng nhập
-    Route::post('/signin', [AuthController::class, 'signIn'])->name('auth.signin');
-    //route xử lý đăng xuất
-    Route::post('/signout', [AuthController::class, 'signOut'])->name('auth.signout');
-});
+//route hiện view đăng nhập
+Route::get('/login', [AuthController::class, 'showSigninForm'])->name('login');
+//route xử lý đăng nhập
+Route::post('/login', [AuthController::class, 'signIn'])->name('auth.signin');
+//route xử lý đăng xuất
+Route::post('/signout', [AuthController::class, 'signOut'])->name('auth.signout');

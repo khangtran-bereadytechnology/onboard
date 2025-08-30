@@ -4,7 +4,7 @@
     <div>
         <h1 class="text-center font-bold text-2xl my-2">SIGN IN</h1>
 
-        <form action="{{ route('auth.showSignin') }}" method="POST" class="max-w-sm mx-auto">
+        <form action="{{ route('login') }}" method="POST" class="max-w-sm mx-auto">
             @csrf
 
             <div class="mb-5">
@@ -15,7 +15,7 @@
             <div class="mb-5">
                 <label for="password">Password</label>
                 <input name="password" type="password" id="password" class="bg-gray-100 w-full p-2.5 " placeholder="******"
-                    required value="111111"/>
+                    required value="111111" />
             </div>
             @if ($errors->all())
                 <div class="mb-5 bg-red-100 text-red-500 px-2 py-3">
