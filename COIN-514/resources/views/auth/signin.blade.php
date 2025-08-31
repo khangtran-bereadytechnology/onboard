@@ -15,7 +15,7 @@
             <div class="mb-5">
                 <label for="password">Password</label>
                 <input name="password" type="password" id="password" class="bg-gray-100 w-full p-2.5 " placeholder="******"
-                    required value="111111" />
+                    required value="11111111" />
             </div>
             @if ($errors->all())
                 <div class="mb-5 bg-red-100 text-red-500 px-2 py-3">

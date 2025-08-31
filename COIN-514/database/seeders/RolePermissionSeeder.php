@@ -33,7 +33,7 @@ class RolePermissionSeeder extends Seeder
         }
 
         //tạo role
-        $superAdmin = Role::create(['name' => 'super-admin']);
+        $superAdmin = Role::create(['name' => 'super_admin']);
         $admin = Role::create(['name' => 'admin']);
         $dataEntry = Role::create(['name' => 'data-entry']);
 

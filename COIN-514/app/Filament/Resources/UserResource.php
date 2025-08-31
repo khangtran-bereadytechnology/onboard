@@ -37,7 +37,7 @@ class UserResource extends Resource
                     ->password()->revealable()
                     ->dehydrateStateUsing(fn($state) => Hash::make($state))
                     ->dehydrated(fn($state) => filled($state))->label('Password (bỏ trống nếu không thay đổi)'),
-                Select::make('roles')->relationship('roles', 'name')->required()->visible(fn() => $user->hasRole('super-admin')),
+                Select::make('roles')->relationship('roles', 'name')->required()->visible(fn() => $user->hasRole('super_admin')),
 
             ])->columns(1);
     }
@@ -85,6 +85,10 @@ class UserResource extends Resource
     {
         /** @var \App\Models\User */
         $user = auth()->user();
-        return $user->hasRole(['super-admin', 'admin']);
+        // if check user tránh báo lỗi sau khi logout
+        if (!$user) {
+            return false;
+        }
+        return $user->hasRole(['super_admin', 'admin']);
     }
 }
