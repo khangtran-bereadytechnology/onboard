@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Post;
@@ -32,8 +33,15 @@ class PostResource extends Resource
                 TextInput::make('title')->required()->minLength(2)
                     ->maxLength(255),
                 Select::make('topic_id')->label('Topic')->relationship('topic', 'name')->required(),
-                TiptapEditor::make('content')
-                    ->profile('simple')
+                TinyEditor::make('content')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('uploads')
+                    ->profile('default')
+                    ->resize('both')
+                    ->toolbarMode('wrap')   // ép các nút tự xuống dòng, không ẩn sau "..."
+                    ->showMenuBar()
+                    ->columnSpan('full')
                     ->required(),
                 Hidden::make('user_id')->default(fn() => auth()->id()),
             ])->columns(1);
