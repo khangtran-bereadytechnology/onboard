@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+    <title>ToDoList</title>
+</head>
+
+<body class="flex items-center justify-center text-xl bg-gray-100">
+    <div x-data="todoApp()" class="w-full max-w-2xl h-screen flex flex-col p-3">
+
+        <div class=" bg-white p-3 rounded-md">
+            <!-- Header -->
+            <div class="flex flex-row w-full justify-between">
+                <!-- Thông tin -->
+                <div class="flex gap-2">
+                    <span>
+                        <span>To Dos: </span>
+                        <span x-text="tasks.length"></span>
+                    </span>|
+                    <span>
+                        <span>Completed: </span>
+                        <span x-text="completedTaskCount()"></span>
+                    </span>
+                </div>
+
+                <!-- Select filter -->
+                <div>
+                    <span>Filter:</span>
+                    <select x-model="filter" class="border border-gray-400 px-1">
+                        <option value="all">All</option>
+                        <option value="done">Done</option>
+                        <option value="notDone">Not done</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Thông báo -->
+            <!-- <div class="h-10 items-center mt-3 rounded-md"> -->
+            <template x-if="tasks.length!==0 && completedTaskCount()===tasks.length">
+                <p class="h-10 mt-2 px-2 py-1 bg-green-100 text-green-700 rounded-md">Congrats you finished your list!
+                </p>
+            </template>
+            <!-- </div> -->
+        </div>
+
+        <!-- Danh sách task -->
+        <div class="space-y-2 flex-1 overflow-y-auto  mt-2 bg-white p-3">
+            <h2 class="font-semibold">Task List</h2>
+            <template x-for="(task, index) in filteredTasks()">
+                <div class="flex justify-between item-center px-4 py-3 bg-gray-100 rounded-md">
+                    <div>
+                        <input type="checkbox" x-model="task.done" class="h-4 w-4 mr-2 hover:cursor-pointer" />
+                        <span x-text="task.text"></span>
+                    </div>
+                    <button @click="removeTask(index)"
+                        class="text-base text-gray-500 hover:cursor-pointer hover:text-gray-700">Remove</button>
+                </div>
+            </template>
+
+        </div>
+        <!-- Tạo task mới -->
+        <div class="flex items-center mb-8 shadow-xl bg-white mt-3 rounded-md ">
+            <input x-model="newTask" @keyup.enter="addTask()" type="text" placeholder="Add to do item"
+                class="flex-1 p-4 focus:outline-none shadow-md rounded-lg" />
+            <button @click="addTask()"
+                class="w-14 h-full text-4xl font-bold cursor-pointer hover:scale-105 hover:shadow-xl hover:bg-blue-200">
+                +
+            </button>
+
+        </div>
+    </div>
+
+    <script>
+        function todoApp() {
+            return {
+                newTask: '',
+                tasks: [],
+                filter: 'all',
+                addTask() {
+                    console.log(this.filter)
+                    if (this.newTask.trim() !== "") {
+                        this.tasks.push({ text: this.newTask, done: false })
+                        this.newTask = ""
+                    }
+                },
+                removeTask(index) {
+                    this.tasks.splice(index, 1)
+                },
+                completedTaskCount() {
+                    return this.tasks.filter(t => t.done).length;
+                },
+                filteredTasks() {
+                    if (this.filter === 'done') {
+                        return this.tasks.filter(t => t.done);
+                    }
+                    if (this.filter === 'notDone') {
+                        return this.tasks.filter(t => !t.done);
+                    }
+                    return this.tasks;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
