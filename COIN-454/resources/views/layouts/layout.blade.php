@@ -16,12 +16,14 @@
     <title>ToDo App</title>
 </head>
 
-<body class="antialiased">
-    {{-- @include('layouts.header') --}}
+<body class="antialiased bg-gray-100 min-h-screen flex flex-col">
+    @include('layouts.header')
 
-    <div>
+    <div class="w-full  flex-1">
         @yield('content')
     </div>
+
+    @include('components.toast')
 </body>
 
 </html>
